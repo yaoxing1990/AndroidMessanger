@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Spectre</string>
+    <string name="facebook_app_id">137236810380513</string>
+    <string name="fb_login_protocol_scheme">fb137236810380513</string>
+</resources>
