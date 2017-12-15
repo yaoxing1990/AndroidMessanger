@@ -74,7 +74,6 @@ public class MainActivity extends FragmentActivity {
         }
 
         protected String doInBackground(String... urls) {
-
             return response;
         }
 
