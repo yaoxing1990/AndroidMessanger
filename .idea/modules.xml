@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Spectre.iml" filepath="$PROJECT_DIR$/Spectre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidMessanger.iml" filepath="$PROJECT_DIR$/AndroidMessanger.iml" />
+      <module fileurl="file://C:\Users\yaoxi\Documents\Jobhunting\OA\SpectreOA\AndroidMessanger\Spectre.iml" filepath="C:\Users\yaoxi\Documents\Jobhunting\OA\SpectreOA\AndroidMessanger\Spectre.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -55,11 +55,8 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        WebView myWebView = (WebView) findViewById(R.id.webview);
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
-        GetToken getToken = new GetToken("yaoxing1990@gmail.com","667GH@#jgye", myWebView);
+        GetToken getToken = new GetToken("","");
         getToken.execute();
 
     }
@@ -69,52 +66,15 @@ public class MainActivity extends FragmentActivity {
         String email;
         String password;
         String response = "";
-        WebView myWebview;
 
 
-        public GetToken (String email, String password, WebView myWebView) {
+        public GetToken (String email, String password) {
             this.email = email;
             this.password = password;
-            this.myWebview = myWebView;
         }
 
         protected String doInBackground(String... urls) {
-            try {
-                Connection.Response loginForm = Jsoup.connect("https://www.facebook.com/v2.6/dialog/oauth?redirect_uri=fb464891386855067%3A%2F%2Fauthorize%2F&display=touch&state=%7B%22challenge%22%3A%22IUUkEUqIGud332lfu%252BMJhxL4Wlc%253D%22%2C%220_auth_logger_id%22%3A%2230F06532-A1B9-4B10-BB28-B29956C71AB1%22%2C%22com.facebook.sdk_client_state%22%3Atrue%2C%223_method%22%3A%22sfvc_auth%22%7D&scope=user_birthday%2Cuser_photos%2Cuser_education_history%2Cemail%2Cuser_relationship_details%2Cuser_friends%2Cuser_work_history%2Cuser_likes&response_type=token%2Csigned_request&default_audience=friends&return_scopes=true&auth_type=rerequest&client_id=464891386855067&ret=login&sdk=ios&logger_id=30F06532-A1B9-4B10-BB28-B29956C71AB1&ext=1470840777&hash=AeZqkIcf-NEW6vBd")
-                        .method(Connection.Method.GET)
-                        .header("user-agent","MOBILE_USER_AGENT")
-                        .header("parser","lxml")
-                        .ignoreContentType(true)
-                        .execute();
-                Document login = loginForm.parse();
-                Elements form = login.getElementsByTag("form");
-                String url = form.get(0).attr("action");
-                myWebview.getSettings().setJavaScriptEnabled(true);
-                MyJavaScriptInterface jInterface = new MyJavaScriptInterface(MainActivity.this);
-                myWebview.addJavascriptInterface(jInterface, "HtmlViewer");
 
-                myWebview.setWebViewClient(
-                        new WebViewClient()
-                        {
-                            @Override
-                            public void onPageFinished(WebView view, String url) {
-                                //Load HTML
-                                myWebview.loadUrl(url);
-                            }
-                        }
-
-                );
-
-                Document next = Jsoup.connect(url)
-                        .data("cookieexists", "false")
-                        .data("email", this.email)
-                        .data("pass", this.password)
-                        .cookies(loginForm.cookies())
-                        .post();
-                System.out.print(next);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
             return response;
         }
 
@@ -339,59 +299,6 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
-
-    class GetMessage extends AsyncTask<String, Void, Response> {
-
-        String tinderToken;
-        Response response = null;
-        String id;
-        String message;
-
-        public GetMessage(String id) {
-            this.id = id;
-        }
-
-        protected Response doInBackground(String... urls) {
-            OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("https://api.gotinder.com/message/" + id)
-                    .get()
-                    .addHeader("X-Auth-Token", tinderToken)
-                    .addHeader("content-type", "application/json")
-                    .addHeader("user-agent", "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)")
-                    .build();
-            try {
-                response = client.newCall(request).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
-        protected void onPostExecute(Response feed) {
-            try {
-                message = this.response.body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-            class MyJavaScriptInterface {
-
-                private Context ctx;
-                public String html;
-
-                MyJavaScriptInterface(Context ctx) {
-                    this.ctx = ctx;
-                }
-
-                @JavascriptInterface
-                public void showHTML(String _html) {
-                    html = _html;
-                }
-            }
 }
 
 
